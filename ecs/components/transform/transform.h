@@ -4,8 +4,8 @@
 typedef struct {
     int x;
     int y;
-} Transform;
+} Transformm;
 
 ComponentMask transform_mask();
-Transform* transform_get(EntityID e);
+Transformm* transform_get(EntityID e);
 void transform_add(EntityID e);

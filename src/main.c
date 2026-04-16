@@ -1,6 +1,7 @@
 #include "ecs.h"
 #include "movement.h"
 #include "transform.h"
+#include <raylib.h>
 
 int main(void) {
 
@@ -8,8 +9,8 @@ int main(void) {
     EntityID e = ecs_entity_create();
 
     transform_add(e);
-    Transform *t = transform_get(e);
-    *t = (Transform){0,0};
+    Transformm *t = transform_get(e);
+    *t = (Transformm){0,0};
 
     
     while (true)

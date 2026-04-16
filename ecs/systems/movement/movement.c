@@ -3,7 +3,7 @@
 #include "stdio.h"
 
 static void movement_update(EntityID e) {
-    Transform *t = transform_get(e);
+    Transformm *t = transform_get(e);
     t->x += 1;
     printf("%d \n", t->x);
 }
