@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <stdbool.h>
 
+//TODO: commands to safely modify entities mid system
+
 typedef uint32_t EntityID;
 typedef uint64_t ComponentMask;
 typedef void (*SystemFn)(EntityID);
