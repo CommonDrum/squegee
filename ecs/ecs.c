@@ -9,18 +9,18 @@
 
 static ComponentMask entity_masks[MAX_ENTITIES];
 
-static int next_entitiy = 0;
+static int next_entity = 0;
 static int next_bit = 0;
 
 
-static System physics_systems[MAX_SYSTEMS];
-static int physics_count = 0;
+static System update_systems[MAX_SYSTEMS];
+static int update_count = 0;
 
 ComponentPool pools[MAX_COMPONENTS];
 
 
-EntityID ecs_entity_create(){   
-    return next_entitiy++;
+EntityID ecs_entity_create(){
+    return next_entity++;
 }
 
 void ecs_entity_destroy(EntityID e) {
@@ -55,17 +55,17 @@ void* ecs_get_pool(ComponentMask mask) {
     return NULL;
 }
 
-void ecs_register_physics(SystemFn fn, ComponentMask mask) {
-    if (physics_count >= MAX_SYSTEMS) return;
-    physics_systems[physics_count++] = (System){fn, mask};
+void ecs_register_update(SystemFn fn, ComponentMask mask) {
+    if (update_count >= MAX_SYSTEMS) return;
+    update_systems[update_count++] = (System){fn, mask};
 }
 
-void ecs_run_physics(float dt) {
-    for (int s = 0; s < physics_count; s++) {
-        System* sys = &physics_systems[s];
-        for (EntityID e = 0; e < (EntityID)next_entitiy; e++) {
+void ecs_run_update() {
+    for (int s = 0; s < update_count; s++) {
+        System* sys = &update_systems[s];
+        for (EntityID e = 0; e < (EntityID)next_entity; e++) {
             if (ecs_has(e, sys->mask)) {
-                sys->fn(e, dt);
+                sys->fn(e);
             }
         }
     }

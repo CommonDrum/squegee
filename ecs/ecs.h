@@ -6,7 +6,7 @@
 
 typedef uint32_t EntityID;
 typedef uint64_t ComponentMask;
-typedef void (*SystemFn)(EntityID, float);
+typedef void (*SystemFn)(EntityID);
 
 typedef struct{
     void* data;
@@ -16,11 +16,11 @@ typedef struct{
 typedef struct {
     SystemFn fn;
     ComponentMask mask;
-} System;
+} System;//TODO: Local enitites? 
 
 
 EntityID ecs_entity_create();
-void     ecs_entity_destroy(EntityID e);
+void     ecs_entity_destroy(EntityID e); //TODO: add list of free ents
 
 ComponentMask ecs_register_component(size_t size);
 void*         ecs_get_pool(ComponentMask mask);
@@ -28,10 +28,6 @@ int           ecs_has(EntityID e, ComponentMask mask);
 void          ecs_add(EntityID e, ComponentMask mask);
 void          ecs_remove(EntityID e, ComponentMask mask);
 
-void ecs_register_physics(SystemFn fn, ComponentMask mask);
-void ecs_run_physics(float dt);
+void ecs_register_update(SystemFn fn, ComponentMask mask);
+void ecs_run_update();
 
-typedef void (*DrawFn)(EntityID);
-
-void ecs_register_draw(DrawFn fn, ComponentMask mask);
-void ecs_run_draw();

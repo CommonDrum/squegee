@@ -14,7 +14,7 @@ int main(void) {
     
     while (true)
     {
-        ecs_run_physics(1.f);
+        ecs_run_update();
     }
     
     return 0;
